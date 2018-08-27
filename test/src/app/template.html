@@ -1,0 +1,75 @@
+<div class="container-fluid">
+        <div class="form-inline my-3">
+            <label>
+                Title
+                <input type="text" class="form-control mr-3 ml-1" placeholder="Enter title" name="title" [(ngModel)]="title" />
+            </label>
+
+            <label>
+                Year
+                <input type="text" class="form-control mr-3 ml-1" placeholder="Enter year" name="year" [(ngModel)]="year" />
+            </label>
+            <button type="button" class="btn btn-outline-primary mr-3" (click)="searchFilms(title, year)">Search</button>
+            <button type="button" class="btn btn-outline-danger mr-3" (click)="clearSearch()">Clear search</button>
+        </div>
+    </div>
+    <br>
+
+    <div class="container-fluid">
+        <h3>Found movies</h3>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>№</th>
+                    <th>Title</th>
+                    <th>Year</th>
+                    <th>ImdbID</th>
+                    <th>Type</th>
+                    <th>Poster</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let film of films; let i = index">
+                    <td>{{i+1}}</td>
+                    <td>{{film.Title}}</td>
+                    <td>{{film.Year}}</td>
+                    <td>{{film.imdbID}}</td>
+                    <td>{{film.Type}}</td>
+                    <td><a href={{film.Poster}} target="_blank">Open poster</a></td>
+                    <td><button type="button" class="btn btn-outline-success" (click)="addFilmInCollection(film)">Add film in my collection</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <br>
+    
+    <div class="container-fluid">
+        <h3>My collection of films</h3>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>№</th>
+                    <th>Title</th>
+                    <th>Year</th>
+                    <th>ImdbID</th>
+                    <th>Type</th>
+                    <th>Poster</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let filmInCollection of filmsInCollection; let i = index">
+                    <td>{{i+1}}</td>
+                    <td>{{filmInCollection?.Title}}</td>
+                    <td>{{filmInCollection.Year}}</td>
+                    <td>{{filmInCollection.imdbID}}</td>
+                    <td>{{filmInCollection.Type}}</td>
+                    <td><a href={{filmInCollection.Poster}} target="_blank">Open poster</a></td>
+                    <td><button type="button" class="btn btn-outline-danger" (click)="deleteFilmFromCollection(i)">Delete film from my collection</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
